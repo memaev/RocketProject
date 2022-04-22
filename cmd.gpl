@@ -1,0 +1,36 @@
+set terminal pngcairo background '#ffffff' fontscale 1.0 dashed size 1000, 600
+set format y '%g'
+set grid
+set title ''
+set border 15
+set xtics norotate border autofreq
+set ytics norotate border autofreq
+data='output.txt'
+tt='active passive parashute'
+clr='green violet black'
+
+set xlabel 't, s'
+set ylabel 'V_y, m/s'
+set out 'rocket_Vy(t).png'
+plot for [i=1:3] data index (i-1) u ($1):($5) t word(tt,i) w l lw 2 dt 1 lc rgb word(clr,i)
+
+set xlabel 't, s'
+set ylabel 'y, m'
+set out 'rocket_y(t).png'
+plot for [i=1:3] data index (i-1) u ($1):($3) t word(tt,i) w l lw 2 dt 1 lc rgb word(clr,i)
+
+set xlabel 'x, m'
+set ylabel 'y, m'
+set out 'rocket_xy.png'
+plot for [i=1:3] data index (i-1) u ($2):($3) t word(tt,i) w l lw 2 dt 1 lc rgb word(clr,i)
+
+set xlabel 't, s'
+set ylabel 'V, m/s'
+set out 'rocket_V.png'
+plot for [i=1:3] data index (i-1) u ($1):(sqrt($4**2+$5**2)) t word(tt,i) w l lw 2 dt 1 lc rgb word(clr,i)
+
+#set xlabel 't, s'
+#set ylabel 'V, m/s'
+#set out 'rocket_V.png'
+#plot for [i=1:3] data index (i-1) u ($1):(sqrt($4**2+$5**2)) t word(tt,i) w l lw 2 dt 1 lc rgb word(clr,i)
+
